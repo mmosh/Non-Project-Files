@@ -1,0 +1,22 @@
+/*
+exp(- teta*length)
+use: backfacing()
+    mix(color1, color2, coef)
+*/
+
+shader myabsorption(
+    color inside_color = color (0.8,0,0),
+    color outside_color = color (0,0,0.8),
+    float Fac = 1.0,
+    float ior = 1.0,
+    output closure color out = holdout()
+){
+    float absopt = 1.0;
+    float raylength = 0.0;
+    
+    getattribute("path:ray_length", raylength);
+    
+    absopt = exp (-(Fac*raylength*backfacing()));
+    out = mix (inside_color, outside_color, absopt) * refraction(N, ior);
+    
+}

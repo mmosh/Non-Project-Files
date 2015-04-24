@@ -1,0 +1,19 @@
+
+shader tank(
+    float Time = 0.5,
+    output color military = color(0,0,0)
+)
+{
+       float red = 0.03;//noise("perlin",P, Time);
+       float green = 0.0;//noise("perlin",P, Time);
+       float blue = 0;//noise("perlin",P, Time);
+       green += noise("perlin",P, Time);
+       if(green > 0.2)
+       {
+            green -=0.1;
+       }
+       //color temp = color (0.0,noise("perlin", P, Time),0);
+       //temp -= color(0, 0, 0);
+       //military = temp;
+       military = color(red,green,blue);
+}
